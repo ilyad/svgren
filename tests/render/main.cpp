@@ -13,6 +13,7 @@
 
 #include <png.h>
 
+#undef M_OS
 #if M_OS == M_OS_LINUX
 #	include <X11/Xlib.h>
 #	include <X11/Xutil.h>
