@@ -556,10 +556,34 @@ void canvas::arc_abs(const r4::vector2<real>& center, const r4::vector2<real>& r
 	curve.rewind(0);
 	double x, y;
 	curve.vertex(&x, &y);
-	this->path.modify_vertex(this->path.total_vertices() - 1, x, y);
+    double dist = agg::calc_distance(x, y, this->path.last_x(), this->path.last_y());
+    printf("dist(curve[0],path[end])=%g\n", dist);
+	// this->path.modify_vertex(this->path.total_vertices() - 1, x, y);
 
 	curve.approximation_scale(this->approximation_scale);
 	this->path.join_path(curve);
+
+    {
+        printf("this->path: BEGIN\n");
+        this->path.rewind(0);
+        for (unsigned i=0, cmd; (cmd = path.vertex(&x, &y)) != 0; ++i)
+            printf("path[i=%d]: {cmd=%u, x=%f, y=%f}\n", i, cmd, x, y);
+        printf("this->path:   END\n");
+
+        agg::vcgen_stroke s;
+        s.remove_all();
+        s.width(5);
+
+        path.rewind(0);
+        for (unsigned i=0, cmd; (cmd = path.vertex(&x, &y)) != 0; ++i)
+            s.add_vertex(cmd, x, y);
+
+        printf("s: BEGIN\n");
+        s.rewind(0);
+        for (unsigned i=0, cmd; (cmd = s.vertex(&x, &y)) != 0; ++i)
+            printf("s[i=%d]: {cmd=%u, x=%f, y=%f}\n", i, cmd, x, y);
+        printf("s:   END\n");
+    }
 #endif
 }
 
