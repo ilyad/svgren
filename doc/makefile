@@ -3,4 +3,4 @@ include prorab-doxygen.mk
 
 this_name := svgren
 
-$(eval $(prorab-build-doxygen))
+# $(eval $(prorab-build-doxygen))
