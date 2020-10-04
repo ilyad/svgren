@@ -38,7 +38,8 @@ endif
 ifeq ($(debug),true)
     this_cxxflags += -DDEBUG
 else
-    this_cxxflags += -O3
+    # make the life a bit more easy:
+    this_cxxflags += -O0
 endif
 
 ifeq ($(gprof),true)
