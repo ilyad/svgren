@@ -570,13 +570,8 @@ void canvas::arc_abs(const r4::vector2<real>& center, const r4::vector2<real>& r
             printf("path[i=%d]: {cmd=%u, x=%f, y=%f}\n", i, cmd, x, y);
         printf("this->path:   END\n");
 
-        agg::vcgen_stroke s;
-        s.remove_all();
-        s.width(5);
-
-        path.rewind(0);
-        for (unsigned i=0, cmd; (cmd = path.vertex(&x, &y)) != 0; ++i)
-            s.add_vertex(cmd, x, y);
+        agg::conv_stroke<decltype(this->path)> s(this->path);
+        s.width(10);
 
         printf("s: BEGIN\n");
         s.rewind(0);
