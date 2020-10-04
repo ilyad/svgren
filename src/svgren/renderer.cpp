@@ -1104,41 +1104,57 @@ void renderer::visit(const svgdom::rect_element& e){
 		this->canvas.move_to_abs(p + r4::vector2<real>{r.x(), 0});
 		this->canvas.line_to_abs(p + r4::vector2<real>{dims.x() - r.x(), 0});
 
+#if 1
 		this->canvas.arc_abs(
 				p + r4::vector2<real>{dims.x() - r.x(), r.y()},
 				r,
 				-utki::pi<real>() / 2,
 				utki::pi<real>() / 2
 			);
+#endif
 
+#if 0
 		this->canvas.line_to_abs(p + dims - r4::vector2<real>{0, r.y()});
+#endif
 
+#if 0
 		this->canvas.arc_abs(
 				p + dims - r,
 				r,
 				0,
 				utki::pi<real>() / 2
 			);
+#endif
 
+#if 0
 		this->canvas.line_to_abs(p + r4::vector2<real>{r.x(), dims.y()});
+#endif
 
+#if 0
 		this->canvas.arc_abs(
 				p + r4::vector2<real>{r.x(), dims.y() - r.y()},
 				r,
 				utki::pi<real>() / 2,
 				utki::pi<real>() / 2
 			);
+#endif
 
+#if 0
 		this->canvas.line_to_abs(p + r4::vector2<real>{0, r.y()});
+#endif
 
+#if 0
 		this->canvas.arc_abs(
 				p + r,
 				r,
 				utki::pi<real>(),
 				utki::pi<real>() / 2
 			);
+#endif
 
+#if 0
 		this->canvas.close_path();
+#endif
 	}
 
 	this->render_shape(group_push.is_pushed());
