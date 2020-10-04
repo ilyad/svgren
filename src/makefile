@@ -26,7 +26,10 @@ this_cxxflags += -D M_SVGREN_BACKGROUND=0xffffffff
 
 ifeq ($(svgren_backend),agg)
     this_cxxflags += -D SVGREN_BACKEND=SVGREN_BACKEND_AGG
-    this_ldlibs += `pkg-config --libs libagg`
+    # assume https://github.com/ghaerr/agg-2.6 is cloned into ../agg-2.6
+    # and compiled by 'cmake . && make' already
+    this_cxxflags += -I$d/../../agg-2.6/agg-src/include
+    this_ldlibs += $d/../../agg-2.6/agg-src/lib/libagg.a
 else ifeq ($(svgren_backend),cairo)
     this_cxxflags += -D SVGREN_BACKEND=SVGREN_BACKEND_CAIRO
     this_ldlibs += `pkg-config --libs cairo`
